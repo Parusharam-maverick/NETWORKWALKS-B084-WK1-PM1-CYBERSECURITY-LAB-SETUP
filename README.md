@@ -1,105 +1,140 @@
  <div align="center">
 
-# 🛡️ Cybersecurity Lab & Network Security Investigation
+# 🔐 Cybersecurity Lab Setup & SOC Investigation
 
-**A hands-on virtual cybersecurity environment with Kali Linux and practical SOC investigations using Wireshark.**
+**Designing a virtual penetration-testing environment and performing practical network security investigations.**
 
-<img src="https://img.shields.io/badge/Domain-Cybersecurity-DC3545?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Virtualization-Oracle%20VirtualBox-246BCE?style=for-the-badge&logo=virtualbox&logoColor=white" />
-<img src="https://img.shields.io/badge/Operating%20System-Kali%20Linux-557C94?style=for-the-badge&logo=kalilinux&logoColor=white" />
-<img src="https://img.shields.io/badge/Network-10.0.0.0%2F24-198754?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Packet%20Analysis-Wireshark-1679A7?style=for-the-badge&logo=wireshark&logoColor=white" />
+<img src="https://img.shields.io/badge/DOMAIN-CYBERSECURITY-red?style=for-the-badge" />
+<img src="https://img.shields.io/badge/PLATFORM-VIRTUALBOX-blue?style=for-the-badge&logo=virtualbox&logoColor=white" />
+<img src="https://img.shields.io/badge/OS-KALI%20LINUX-557C94?style=for-the-badge&logo=kalilinux&logoColor=white" />
+<img src="https://img.shields.io/badge/NETWORK-10.0.0.0%2F24-238F89?style=for-the-badge" />
+<img src="https://img.shields.io/badge/TRAFFIC%20ANALYSIS-WIRESHARK-1679A7?style=for-the-badge&logo=wireshark&logoColor=white" />
 
 </div>
 
 ---
 
-## 📖 Introduction
+## 📌 01. Project Overview
 
-This project documents the implementation of a virtual cybersecurity laboratory using **Oracle VirtualBox and Kali Linux**, followed by practical network security investigations using Wireshark.
+This project documents the setup of a personal cybersecurity testing environment using Oracle VirtualBox and Kali Linux, followed by practical network security investigations using Wireshark.
 
-The virtual lab provides a dedicated environment for cybersecurity experimentation, network configuration, and ethical hacking practice. A custom NAT Network was configured to establish a virtual network with a defined IP addressing scheme.
+The virtual laboratory was configured with a dedicated NAT Network, static IP addressing, internet connectivity, and host-to-guest integration. The environment provides a foundation for learning penetration testing, network reconnaissance, vulnerability assessment, and other ethical hacking techniques.
 
-Alongside the lab setup, six SOC investigation exercises were completed to explore network traffic analysis, suspicious communication, exposed credentials, brute-force activities, and VoIP investigations.
+In addition to the infrastructure setup, six practical SOC investigation labs were completed. These exercises involved analyzing captured network traffic to identify attackers, reconstruct TCP communication, discover exposed credentials, detect brute-force attempts, and investigate suspicious VoIP calls.
 
-## 🎯 Project Objectives
+## 🎯 02. Implementation Objectives
 
-- Build a virtual cybersecurity environment using VirtualBox.
+The primary goals of this project were:
+
+- Establish a working cybersecurity laboratory using VirtualBox.
 - Deploy Kali Linux as the primary security testing machine.
-- Configure a custom NAT Network with IPv4 subnet `10.0.0.0/24`.
-- Assign a static IP address to Kali Linux.
-- Establish network connectivity and internet access.
-- Configure host-to-guest integration and shared resources.
-- Practice network packet analysis using Wireshark.
-- Investigate suspicious network activities through practical SOC exercises.
+- Configure a custom NAT Network using the `10.0.0.0/24` subnet.
+- Assign a static IPv4 address to Kali Linux.
+- Enable internet access and DNS resolution.
+- Configure clipboard, drag-and-drop, and shared-folder functionality.
+- Create a recoverable VM snapshot.
+- Perform practical network traffic investigations using Wireshark.
+- Develop foundational skills in SOC analysis and threat identification.
 
 ---
 
-## 🏗️ Virtual Lab Architecture
+## 🏗️ 03. Virtual Lab Architecture
 
-The environment uses Oracle VirtualBox as the virtualization platform, with Kali Linux connected to a custom NAT Network.
+The environment consists of a Windows host system running Oracle VirtualBox, with Kali Linux operating as a guest virtual machine.
 
-### Network Topology
+A custom NAT Network provides connectivity to the virtual machines while allowing outbound internet access.
+
+### Network Design
 
 ```text
-                 INTERNET
-                    |
-                    |
-             HOST COMPUTER
-              Windows OS
-                    |
-                    |
-             ORACLE VIRTUALBOX
-                    |
-                    |
-              NAT NETWORK
-              10.0.0.0/24
-                    |
-                    |
-               KALI LINUX
-                10.0.0.2
-                    |
-             SECURITY TESTING
+                    INTERNET
+                       |
+                       |
+                WINDOWS 10 HOST
+                 8 GB RAM / i7
+                       |
+                       |
+                ORACLE VIRTUALBOX
+                    v7.2
+                       |
+                       |
+                 NAT NETWORK
+                  NatNetwork
+                  10.0.0.0/24
+                       |
+                       |
+                  KALI LINUX
+                   10.0.0.2
+                       |
+                SECURITY TESTING
+                       |
+             ADDITIONAL TARGET VMs
+                (Future Expansion)
 ```
 
-The network is designed to accommodate additional virtual machines for future security testing and network investigation exercises.
+### Planned Virtual Machine Address Allocation
 
-## ⚙️ Environment Configuration
+| Virtual Machine | IPv4 Address | Purpose |
+|---|---|---|
+| Kali Linux | `10.0.0.2` | Security testing machine |
+| Windows 10/11 | `10.0.0.7` | Client testing |
+| Additional VM | `10.0.0.9` | Target environment |
+| Windows Server 2016 | `10.0.0.10` | Server testing |
+| Additional VM | `10.0.0.11` | Target environment |
+| Additional VM | `10.0.0.16` | Target environment |
 
-| Component | Implemented Configuration |
-|---|---|
-| Host Platform | Windows |
-| Virtualization | Oracle VirtualBox |
-| Guest Operating System | Kali Linux 2026.3 |
-| Virtual Network | NAT Network |
-| Network Name | NatNetwork |
-| IPv4 Network | `10.0.0.0/24` |
-| Subnet Mask | `255.255.255.0` |
-| Kali Linux Address | `10.0.0.2/24` |
-| Default Gateway | `10.0.0.1` |
-| DNS Server | `8.8.8.8` |
-| DHCP | Enabled |
-| IPv6 | Disabled |
+*The additional target machines are planned lab allocations and are not represented as already deployed.*
 
 ---
 
-## 🔧 Implementation & Configuration
+## ⚙️ 04. System & Network Specifications
 
-### 1. Virtualization Environment
+### Host and Virtualization Environment
 
-Oracle VirtualBox was installed and configured to host the cybersecurity virtual machine.
+| Component | Configuration |
+|---|---|
+| Host Operating System | Windows 10 |
+| System RAM | 8 GB |
+| Processor | Intel Core i7 |
+| Hypervisor | Oracle VirtualBox 7.2 |
+| Archive Utility | 7-Zip |
+| Guest Operating System | Kali Linux 2026.3 |
+| Kali VM Memory | 2048 MB |
+| Network Adapter | Intel PRO/1000 MT Desktop |
 
-7-Zip was also used as the archive utility for handling virtual machine packages.
+### NAT Network Configuration
 
-**Tools:**
-- Oracle VirtualBox
-- 7-Zip
+| Parameter | Value |
+|---|---|
+| Network Name | NatNetwork |
+| Network Type | NAT Network |
+| IPv4 Prefix | `10.0.0.0/24` |
+| Subnet Mask | `255.255.255.0` |
+| DHCP Server | Enabled |
+| IPv6 | Disabled |
+| Kali Static IP | `10.0.0.2/24` |
+| Default Gateway | `10.0.0.1` |
+| DNS Server | `8.8.8.8` |
+| Planned Additional VM Range | `10.0.0.3 – 10.0.0.99` |
 
-### 2. Custom NAT Network Configuration
+---
 
-A custom NAT Network named `NatNetwork` was configured in VirtualBox.
+## 🛠️ 05. Environment Implementation
 
-Network parameters:
+### 5.1 Preparing the Virtualization Environment
+
+Installed 7-Zip to handle compressed virtual machine packages and Oracle VirtualBox as the primary virtualization platform.
+
+Software resources:
+
+- [7-Zip](https://7-zip.org/download.html)
+- [Oracle VirtualBox](https://virtualbox.org/wiki/Downloads)
+
+### 5.2 Creating the Virtual Network
+
+Created a dedicated NAT Network through VirtualBox Network Manager.
+
+The network was configured with the following parameters:
 
 ```text
 Network Name : NatNetwork
@@ -108,187 +143,346 @@ DHCP         : Enabled
 IPv6         : Disabled
 ```
 
-This configuration provides a virtual networking environment for connected virtual machines and outbound network connectivity.
+<details>
+<summary>View NAT Network configuration screenshot</summary>
 
-![VirtualBox NAT Network Configuration](2-screenshot-network-settings-1.png)
+![VirtualBox NAT Network](2-screenshot-network-settings-1.png)
 
-### 3. Kali Linux Deployment
+</details>
 
-Kali Linux 2026.3 was imported into VirtualBox and successfully started as the primary virtual machine for the lab.
+The NAT Network configuration allows connected virtual machines to communicate with one another and access external networks through network address translation.
 
-The virtual machine was connected to the previously configured NAT Network.
+### 5.3 Deploying Kali Linux
 
-![Kali Linux Desktop](1-screenshot-kali-linux.png)
+Downloaded the Kali Linux 2026.3 VirtualBox image from the official Kali Linux website and imported it into VirtualBox.
 
-### 4. Static IP Configuration
-
-The Kali Linux network interface was configured with a manual IPv4 address.
+Virtual machine configuration:
 
 ```text
-IPv4 Method : Manual
-IP Address  : 10.0.0.2
-Netmask     : 24
-Gateway     : 10.0.0.1
-DNS         : 8.8.8.8
+Operating System : Kali Linux 2026.3
+Memory           : 2048 MB
+Network Adapter  : Adapter 1
+Attached To      : NAT Network
+Network Name     : NatNetwork
+Adapter Type     : Intel PRO/1000 MT Desktop
 ```
 
-A static address provides a consistent network identity for the Kali Linux machine within the virtual lab.
+The virtual machine was successfully started and the Kali Linux desktop environment was accessed.
 
-![Kali Linux IPv4 Configuration](3-screenshot-kali-network-settings.png)
+![Kali Linux Virtual Machine](1-screenshot-kali-linux.png)
 
-### 5. Virtual Machine Integration
+Official download: https://www.kali.org/get-kali/
 
-The VirtualBox integration settings were configured to support interaction between the host system and Kali Linux.
+### 5.4 Configuring Static IPv4 Addressing
 
-- Shared Clipboard: Bidirectional
-- Drag and Drop: Bidirectional
-- Shared Folder: Host downloads directory
-- Auto-mount: Enabled
+Configured the Kali Linux network connection manually using NetworkManager.
 
-These features simplify file transfer and interaction between the host and guest operating systems.
+The following IPv4 parameters were applied:
 
-### 6. Snapshot and Recovery
+```text
+Method       : Manual
+IP Address   : 10.0.0.2
+Netmask      : 24
+Gateway      : 10.0.0.1
+DNS Server   : 8.8.8.8
+```
 
-A baseline snapshot was created after the initial Kali Linux configuration to preserve the configured environment and provide a recovery point for subsequent experiments.
+<details>
+<summary>View Kali Linux IPv4 configuration screenshot</summary>
 
----
+![Kali Linux IPv4 Settings](3-screenshot-kali-network-settings.png)
 
-## 🔍 SOC Analyst Practical Investigations
+</details>
 
-In addition to building the virtual environment, six browser-based Wireshark investigation labs were completed.
+This configuration establishes a consistent network address for the Kali Linux machine.
 
-Each lab contained ten investigation tasks, providing practical exposure to different network security scenarios.
+### 5.5 Enabling Host-to-Guest Integration
 
-### Investigation 01 — Attacker IP Identification
+Configured VirtualBox integration features to simplify interaction and file exchange between Windows and Kali Linux.
 
-**Focus:** Network traffic investigation.
+| Feature | Configuration |
+|---|---|
+| Shared Clipboard | Bidirectional |
+| Drag and Drop | Bidirectional |
+| Shared Folder | Enabled |
+| Host Folder | `/downloads` |
+| Auto-mount | Enabled |
+| Make Permanent | Enabled |
 
-Identified suspicious source IP activity by examining captured packets and their communication patterns.
+The shared folder provides a convenient way to transfer files between the host operating system and the virtual machine.
 
-[Open Lab 3](https://networkwalks.com/wireshark-lab3/)
+### 5.6 Creating a Recovery Snapshot
 
-### Investigation 02 — TCP Stream Analysis
+After completing the initial virtual machine configuration, created a baseline snapshot.
 
-**Focus:** Communication reconstruction.
+```text
+Snapshot Name:
+Clean Kali - Network Setup
+```
 
-Used Follow TCP Stream to reconstruct conversations and inspect information exchanged between network endpoints.
-
-[Open Lab 4](https://networkwalks.com/wireshark-lab4/)
-
-### Investigation 03 — TCP Stream Analysis & Hidden Data
-
-**Focus:** Network data inspection.
-
-Investigated TCP communication and examined transmitted information to identify hidden data.
-
-[Open Lab 5](https://networkwalks.com/wireshark-lab5/)
-
-### Investigation 04 — HTTP Credential Exposure
-
-**Focus:** Clear-text credential investigation.
-
-Examined unencrypted HTTP communication to identify usernames and passwords transmitted through network requests.
-
-[Open Lab 6](https://networkwalks.com/wireshark-lab6/)
-
-### Investigation 05 — Brute-Force Attack Detection
-
-**Focus:** Suspicious authentication activity.
-
-Analyzed repeated login attempts and investigated the source responsible for password-guessing activity.
-
-[Open Lab 7](https://networkwalks.com/wireshark-lab7/)
-
-### Investigation 06 — VoIP Scam Investigation
-
-**Focus:** Voice communication analysis.
-
-Examined captured VoIP traffic, reconstructed the recorded call, and investigated the suspicious caller.
-
-[Open Lab 8](https://networkwalks.com/wireshark-lab8/)
+This snapshot preserves the initial configured state and provides a recovery point before subsequent security experiments.
 
 ---
 
-## 📊 Investigation Summary
+## 🔎 06. Network Configuration Verification
 
-| No. | SOC Investigation | Tasks |
+After configuring the virtual network and Kali Linux, the following commands were used to inspect and test the network environment.
+
+### Check IP Configuration
+
+```bash
+ip a
+```
+
+### Inspect Routing Information
+
+```bash
+ip route
+```
+
+### Test Gateway Connectivity
+
+```bash
+ping -c 4 10.0.0.1
+```
+
+### Test Internet Connectivity
+
+```bash
+ping -c 4 8.8.8.8
+```
+
+### Verify DNS Resolution
+
+```bash
+nslookup networkwalks.com
+```
+
+### Check Nmap Installation
+
+```bash
+nmap --version
+```
+
+These checks were used to examine IP configuration, routing, gateway communication, internet connectivity, DNS resolution, and the availability of Nmap.
+
+---
+
+## 🐞 07. Troubleshooting & Issues Resolved
+
+During the lab configuration, two important issues were encountered and resolved.
+
+### Issue 1: Kali Linux Internet Connectivity
+
+After configuring a manual IPv4 address, internet connectivity issues occurred in the Kali Linux virtual machine.
+
+This issue was addressed using the NetworkManager Duplicate Address Detection timeout configuration.
+
+The following commands were executed:
+
+**Step 1 — Modify the DAD timeout**
+
+```bash
+sudo nmcli connection modify "Wired connection 1" ipv4.dad-timeout 0
+```
+
+**Step 2 — Restart the network connection**
+
+```bash
+sudo nmcli connection down "Wired connection 1"
+```
+
+**Step 3 — Bring the connection back up**
+
+```bash
+sudo nmcli connection up "Wired connection 1"
+```
+
+After executing these commands, the Kali Linux network connection was restarted and connectivity was checked again.
+
+The workaround is relevant to the NetworkManager configuration used in the lab. The connection name may differ on other installations.
+
+### Issue 2: VirtualBox Hardware Virtualization Error
+
+The Kali Linux virtual machine initially encountered a startup issue related to hardware virtualization.
+
+The issue was resolved by enabling Intel VT-x through the computer's BIOS/UEFI configuration.
+
+**Resolution steps:**
+
+1. Restarted the computer.
+2. Entered the BIOS/UEFI settings.
+3. Located the processor or virtualization configuration.
+4. Enabled Intel VT-x / hardware virtualization.
+5. Saved the configuration.
+6. Restarted Windows.
+7. Started the Kali Linux virtual machine again.
+
+After enabling hardware virtualization, the virtual machine started successfully.
+
+---
+
+## 🕵️ 08. SOC Analyst – Wireshark Investigation
+
+Alongside the virtual lab implementation, completed six browser-based network investigation labs.
+
+Each investigation consisted of ten tasks and focused on a specific network security scenario.
+
+### Lab 01 — Identifying the Attacker's IP Address
+
+**Objective:** Investigate captured network traffic to identify the IP address associated with suspicious activity.
+
+**Technical focus:**
+- Source and destination IP analysis
+- Packet inspection
+- Suspicious communication identification
+
+[Access Lab 3](https://networkwalks.com/wireshark-lab3/)
+
+### Lab 02 — TCP Stream Analysis: Part 1
+
+**Objective:** Reconstruct TCP communication and inspect the information exchanged between network endpoints.
+
+**Technical focus:**
+- TCP packet analysis
+- Follow TCP Stream
+- Conversation reconstruction
+
+[Access Lab 4](https://networkwalks.com/wireshark-lab4/)
+
+### Lab 03 — TCP Stream Analysis: Part 2
+
+**Objective:** Examine another network capture to identify hidden information transmitted through TCP communication.
+
+**Technical focus:**
+- TCP stream inspection
+- Data reconstruction
+- Hidden information investigation
+
+[Access Lab 5](https://networkwalks.com/wireshark-lab5/)
+
+### Lab 04 — HTTP Plain-Text Credential Investigation
+
+**Objective:** Investigate unencrypted HTTP traffic to identify exposed usernames and passwords.
+
+**Technical focus:**
+- HTTP request analysis
+- POST request inspection
+- Plain-text credential identification
+
+[Access Lab 6](https://networkwalks.com/wireshark-lab6/)
+
+### Lab 05 — Detecting a Brute-Force Attacker
+
+**Objective:** Analyze repeated login attempts and identify the source responsible for suspicious authentication activity.
+
+**Technical focus:**
+- Authentication traffic analysis
+- Repeated login attempts
+- Source IP investigation
+- Brute-force detection
+
+[Access Lab 7](https://networkwalks.com/wireshark-lab7/)
+
+### Lab 06 — VoIP Call Investigation
+
+**Objective:** Investigate captured voice communication and identify the suspicious caller involved in the recorded call.
+
+**Technical focus:**
+- VoIP packet analysis
+- Call reconstruction
+- Audio investigation
+- Suspicious communication identification
+
+[Access Lab 8](https://networkwalks.com/wireshark-lab8/)
+
+### Investigation Completion Summary
+
+| No. | Investigation | Tasks |
 |---|---|---:|
 | 01 | Attacker IP Identification | 10 |
 | 02 | TCP Stream Analysis – Part 1 | 10 |
 | 03 | TCP Stream Analysis – Part 2 | 10 |
-| 04 | HTTP Plain-Text Credentials | 10 |
-| 05 | Brute-Force Attacker Detection | 10 |
+| 04 | HTTP Credential Investigation | 10 |
+| 05 | Brute-Force Detection | 10 |
 | 06 | VoIP Scam Investigation | 10 |
 | | **Total** | **60** |
 
 ---
 
-## 🧠 Skills & Technical Knowledge
+## 💡 09. Technical Knowledge & Learning Outcomes
 
-The project provided practical experience in the following areas:
+The implementation and investigation exercises provided practical exposure to several cybersecurity concepts.
 
-**Virtualization & Linux**
-- Virtual machine deployment and management
-- Kali Linux environment configuration
-- Virtual network administration
-- Static IPv4 configuration
+### Virtualization and System Administration
+- Virtual machine deployment and configuration.
+- VirtualBox network management.
+- Kali Linux administration.
+- BIOS/UEFI hardware virtualization.
+- VM snapshots and recovery.
 
-**Networking**
-- IPv4 addressing and subnetting
-- NAT Network configuration
-- Gateway and DNS configuration
-- Virtual machine networking
+### Networking Fundamentals
+- IPv4 addressing and subnetting.
+- NAT versus NAT Network.
+- Static IP configuration.
+- Default gateways and DNS.
+- Network connectivity troubleshooting.
 
-**Network Security & SOC**
-- Packet inspection using Wireshark
-- TCP stream reconstruction
-- HTTP traffic investigation
-- Clear-text credential identification
-- Brute-force activity detection
-- VoIP traffic analysis
-- Network threat investigation
-
----
-
-## 🔐 Ethical Considerations
-
-This project is intended for cybersecurity education and authorized security testing.
-
-All security experiments should be conducted only within controlled laboratory environments or on systems for which explicit permission has been obtained.
+### Network Security and SOC Operations
+- Packet inspection using Wireshark.
+- TCP communication reconstruction.
+- HTTP traffic investigation.
+- Clear-text credential exposure.
+- Brute-force activity identification.
+- VoIP traffic investigation.
+- Basic network threat analysis.
 
 ---
 
-## 📚 References & Resources
+## 🔐 10. Security & Ethical Guidelines
 
-- [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-- [Kali Linux](https://www.kali.org/get-kali/)
-- [Wireshark](https://www.wireshark.org/)
-- [7-Zip](https://www.7-zip.org/download.html)
-- [Networkwalks](https://www.networkwalks.com/)
+This environment is designed for educational purposes, cybersecurity experimentation, and authorized security testing.
+
+- Perform testing only on systems you own or have permission to assess.
+- Keep intentionally vulnerable machines within controlled lab networks.
+- Do not expose vulnerable virtual machines directly to public networks.
+- Do not inspect or capture third-party network traffic without authorization.
 
 ---
 
-## 👨‍💻 Project Information
+## 📚 11. Tools & Learning Resources
 
-| Category | Details |
+| Resource | Official Website |
 |---|---|
-| Project Title | Cybersecurity Lab & Network Security Investigation |
-| Domain | Cybersecurity |
-| Virtualization Platform | Oracle VirtualBox |
-| Security Operating System | Kali Linux |
-| Network Configuration | NAT Network – `10.0.0.0/24` |
-| Packet Analysis Tool | Wireshark |
-| Practical SOC Labs | 6 |
-| Investigation Tasks | 60 |
+| 7-Zip | https://7-zip.org/ |
+| Oracle VirtualBox | https://virtualbox.org/ |
+| Kali Linux | https://kali.org/ |
+| Wireshark | https://wireshark.org/ |
+| Networkwalks | https://networkwalks.com/ |
 
-**Project Outcome:** Successfully established a Kali Linux-based virtual cybersecurity environment and completed six practical network traffic investigation labs covering fundamental SOC analysis techniques.
+---
+
+## 👨‍💻 12. Project Information
+
+| Attribute | Details |
+|---|---|
+| Project Name | Cybersecurity Lab & SOC Investigation |
+| Project Domain | Cybersecurity |
+| Virtualization Platform | Oracle VirtualBox 7.2 |
+| Security Distribution | Kali Linux 2026.3 |
+| Network Configuration | NAT Network |
+| IPv4 Subnet | `10.0.0.0/24` |
+| Primary Lab Machine | Kali Linux |
+| Network Analysis Tool | Wireshark |
+| SOC Investigation Labs | 6 |
+| Total Investigation Tasks | 60 |
 
 ---
 
 <div align="center">
 
-**Learn • Configure • Investigate • Secure**
+### Explore. Analyze. Understand. Secure.
 
-*Hands-on cybersecurity practice through virtual labs and network forensics.*
+**A practical journey into virtual cybersecurity environments and network security investigations.**
 
 </div>
